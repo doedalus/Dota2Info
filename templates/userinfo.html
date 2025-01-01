@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Dota info: {{userid}}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div style="flex: 1; margin-right: 30px;margin-left: 30px;">
+        <h3 style="font-weight: 400;">Player details : <span style="color:#a2bffe">{{ userid }}</span></h3>
+        <img style="float: left; margin-right: 30px; margin-bottom: 30px;height:220px" src="{{ avatarfull }}">
+        <p>Player name :<span style="color:#c0c0c0"> {{ personaname }}</span></p>
+        <p>Steam profile link : <a target="_blank" style="color:#a2bffe;" href="{{ profileurl }}">here</a></p>
+        <p>Dota+ : <span style="color:#c0c0c0">{{ plus }}</span></p>
+        <p>Rank : <span style="color:#c0c0c0">{{ rank }}</span></p>
+        <p>Winrate : <span style="color:#c0c0c0">{{ winrate }}% (W: <span style="color:#00db07">{{ win }}</span>/L: <span style="color:red;">{{ lose }}</span>)</span></p>
+        <p>Country code: <span style="color:#c0c0c0">{{ loccountrycode }}</span></p>
+    </div>
+    <div style="flex: 1;margin-right: 30px;margin-left: 30px;">
+
+    </div>
+</div>
+<div class="container">
+    <div style="flex: 1;">
+        <div style="margin-right: 30px;margin-left: 30px;margin-bottom: 30px;">
+        <div>
+            <span style="font-size:20px;font-weight: 500;">Favorite words</span><span style="color:#c0c0c0;font-size:10px;position: relative; bottom: 5px" title="This section will show statistics of the words you have written recently.">(?)</span><span style="font-size:20px;font-weight: 500;"> :</span>
+            <ul>
+            {% for item in wordcloud.items() %}
+            {% if item[0] != 'error' %}
+                <li>{{ item[0] }} : {{ item[1] }}</li>
+            {% else %}
+                <p>- : -</p>
+            {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+        </div>
+    </div>
+    <div style="flex: 2;">
+    <div >
+        <span style="font-size:20px;font-weight: 500;">Heroes </span> <span style="color:#c0c0c0">(matches, win, lose, winrate)</span> <span style="font-size:20px;font-weight: 500;">:</span>
+        <ul>
+            {% for item in listheroes %}
+            {% if isvalid and item['games'] > 0 %}
+            <li>{{ heroid[item['hero_id']] }} <span style="color:#c0c0c0">(matches: <span style="color:white">{{item['games']}}</span>; Win: <span style="color:#00db07">{{item['win']}}</span>; Lose: <span style="color:red">{{item['games'] - item['win']}}</span>; Winrate: <span style="color:yellow">{{((item['win']+0.001)/(item['games']+0.001)*100) | round(1, 'floor') }}%</span>)</span></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<script>
+    document.getElementById('toggleHeroes').onclick = function() {
+        var heroesList = document.getElementById('heroesList');
+        if (heroesList.style.display === 'none') {
+            heroesList.style.display = 'block'; // Показываем список
+        } else {
+            heroesList.style.display = 'none'; // Скрываем список
+        }
+    }
+</script>
+    <div style="flex:2;margin-right: 30px;margin-left: 30px;margin-bottom: 30px;">
+        <span style="font-size:20px;font-weight: 500;">Last matches: </span>
+        <ul>
+        {% for item in matches %}
+            <li><span style="color:#c0c0c0"><span style="color:#a2bffe">ID: </span>{{ item[0] }} <span style="color:white">|</span> KDA: <span style="color:#00db07">{{ item[1] }}</span>/<span style="color:red">{{ item[2] }}</span>/<span style="color:white">{{ item[3] }}</span> <span style="color:white">|</span> <span style="color:yellow">Hero:</span> {{ item[4] }}</span></li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

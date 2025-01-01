@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Player not found{% endblock %}
+{% block body %}
+<div class="not-found-message">Player not found</div>
+
+<style>
+    .not-found-message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh; /* Полная высота окна */
+        font-size: 36px; /* Размер шрифта */
+        text-align: center;
+        margin: 0; /* Убираем отступы */
+    }
+</style>
+{% endblock %}

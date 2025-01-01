@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Dota player info{% endblock %}
+{% block head %}<style>
+        /* Основные стили для контейнера */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color:black; /* Фоновый цвет страницы */
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        /* Стили для формы */
+        form {
+            width: 50%; /* Увеличим ширину формы в 2 раза */
+            background-color: #black; /* Фоновый цвет формы */
+            border-radius: 10px; /* Закругленные углы */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Тень для формы */
+            padding: 30px; /* Внутренние отступы */
+            text-align: center;
+        }
+
+        /* Стили для меток */
+        label {
+            font-size: 18px; /* Увеличим размер шрифта */
+            margin-bottom: 10px;
+        }
+
+        /* Стили для поля ввода */
+        input[type="text"] {
+            width: 100%; /* Полная ширина */
+            padding: 15px; /* Внутренние отступы */
+            border: 2px solid #ddd; /* Рамка поля ввода */
+            border-radius: 5px; /* Закругленные углы */
+            font-size: 16px; /* Размер шрифта */
+            margin-top: 8px; /* Отступ сверху */
+            transition: border-color 0.3s; /* Плавный переход для рамки */
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff; /* Цвет рамки при фокусе */
+            outline: none; /* Убираем обводку */
+        }
+
+        /* Стили для кнопки */
+        button {
+            background-color: #007bff; /* Цвет кнопки */
+            color: white; /* Цвет текста кнопки */
+            border: none; /* Без рамки */
+            border-radius: 5px; /* Закругленные углы */
+            padding: 15px 30px; /* Внутренние отступы */
+            font-size: 18px; /* Размер шрифта */
+            cursor: pointer; /* Курсор при наведении */
+            transition: background-color 0.3s; /* Плавный переход для фона */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Цвет кнопки при наведении */
+        }
+
+        /* Мобильные стили */
+        @media (max-width: 768px) {
+            form {
+                width: 75%; /* Ширина формы на мобильных устройствах */
+            }
+        }
+    </style>{% endblock %}
+{% block body %}
+<div>
+    <form id="playerForm" onsubmit="redirectToPage(event)">
+        <label for="playerID">Player ID:</label><br>
+        <input type="text" id="playerID" name="playerID" required><br><br>
+        <button type="submit">Search</button>
+    </form>
+</div>
+<script>
+    function redirectToPage(event) {
+        event.preventDefault(); // предотвращаем стандартное поведение формы
+        var playerID = document.getElementById("playerID").value; // получаем значение из поля ввода
+        window.location.href = '/' + encodeURIComponent(playerID) + '/'; // редиректим на нужный адрес
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+body {
+    background-color:black;
+    color:white;
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+header {
+    background-color:#323332;
+    font-size:30px;
+    text-align:left;
+}
+
+.headericon {
+    position: relative;
+    left: 15px;bottom:6px
+}
+
+.container {
+    display: flex;
+    margin-left: 2%;
+    background-color:#181c18;
+    margin-right: 2%;
+}
+
+.word-list {
+    display: none;
+    margin: 10px 0;
+}
+button {
+    margin: 0px 0;
+    cursor: pointer;
+    font-family: "Kanit", sans-serif;
+    padding: 5px;
+    border-radius: 10px;
+}
+
